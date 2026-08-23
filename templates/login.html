@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block titulo %}Iniciar sesión — Vibrax{% endblock %}
+
+{% block contenido %}
+
+<div class="login-container">
+  <h1>Panel de pedidos</h1>
+  <p>Inicia sesión para ver los pedidos de Vibrax.</p>
+
+  {% with mensajes = get_flashed_messages(with_categories=true) %}
+    {% if mensajes %}
+    <div class="mensajes">
+      {% for categoria, mensaje in mensajes %}
+        <div class="mensaje-error">{{ mensaje }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST">
+    <div class="campo">
+      <label for="usuario">Usuario</label>
+      <input type="text" id="usuario" name="usuario" required autofocus />
+    </div>
+
+    <div class="campo">
+      <label for="contrasena">Contraseña</label>
+      <input type="password" id="contrasena" name="contrasena" required />
+    </div>
+
+    <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Entrar</button>
+  </form>
+</div>
+
+{% endblock %}

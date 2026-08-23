@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block titulo %}Inspiraciones — Vibrax{% endblock %}
+{% block descripcion %}Mira los estampados que ya hemos hecho y úsalos como inspiración para tu propio diseño.{% endblock %}
+
+{% block contenido %}
+
+<section class="seccion">
+  <div class="seccion-titulo">
+    <h2>Inspiraciones</h2>
+    <p>Estampados que ya hemos hecho. Úsalos como punto de partida para tu propio diseño.</p>
+  </div>
+
+  {% if fotos %}
+  <div class="galeria-prendas">
+    {% for foto in fotos %}
+    <div class="foto-prenda">
+      <img src="{{ url_for('static', filename='img/inspiraciones/' ~ foto) }}" alt="Estampado Vibrax" loading="lazy" />
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="badge-vacio">Todavía no hay fotos de inspiración cargadas.</div>
+  {% endif %}
+</section>
+
+<section class="seccion-destacada patron-topografico">
+  <div class="icono-destacado">✨</div>
+  <h2>¿Te gustó algún diseño?</h2>
+  <p style="margin-bottom: 24px;">Cuéntanos cuál te inspiró y lo adaptamos a tu gusto.</p>
+  <a href="{{ url_for('pedido') }}" class="btn">Hacer mi pedido</a>
+</section>
+
+{% endblock %}

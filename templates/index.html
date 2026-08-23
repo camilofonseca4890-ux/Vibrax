@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block titulo %}Vibrax — Camisetas estampadas a tu manera{% endblock %}
+{% block descripcion %}Diseña tu prenda a tu estilo. Estampados 100% personalizados, sin límite y sin pagar más. Camisetas, buzos y hoodies para niños y adultos.{% endblock %}
+
+{% block contenido %}
+
+<section class="hero">
+  <div class="hero-texto">
+    <h1>Diseña tu prenda <span>a tu estilo</span>.</h1>
+    <p>
+      Diseños 100% personalizados, sin límite de estampado y sin pagar más.
+      Camisetas, buzos y hoodies con estampados duraderos, para niños y adultos.
+    </p>
+    <a href="{{ url_for('pedido') }}" class="btn">Pedir la mía</a>
+    <a href="{{ url_for('catalogo') }}" class="btn btn-secundario" style="margin-left: 12px;">Ver precios</a>
+  </div>
+  <div class="hero-visual" aria-hidden="true"></div>
+</section>
+
+<section class="seccion">
+  <div class="seccion-titulo">
+    <h2>¿Cómo funciona?</h2>
+    <p>Pedir tu estampado personalizado es simple.</p>
+  </div>
+  <div class="pasos">
+    <div class="paso">
+      <div class="numero">1</div>
+      <h3>Cuéntanos tu idea</h3>
+      <p>Describe el diseño o sube una imagen de referencia en el formulario de pedido.</p>
+    </div>
+    <div class="paso">
+      <div class="numero">2</div>
+      <h3>Elige los detalles</h3>
+      <p>Talla, color de tela, tipo de estampado y cuándo lo necesitas.</p>
+    </div>
+    <div class="paso">
+      <div class="numero">3</div>
+      <h3>Te contactamos</h3>
+      <p>Revisamos tu pedido y coordinamos contigo el pago y la entrega.</p>
+    </div>
+  </div>
+</section>
+
+<section class="seccion-destacada patron-topografico">
+  <div class="icono-destacado">👕</div>
+  <h2>Así lucen nuestras prendas</h2>
+  <p>Nosotros mismos usando Vibrax, para que veas cómo quedan en la calle.</p>
+</section>
+
+<section class="seccion">
+  <div class="galeria-prendas">
+    {% for foto in fotos %}
+    <div class="foto-prenda">
+      <img src="{{ url_for('static', filename='img/clientes/' ~ foto) }}" alt="Vibrax puesto" loading="lazy" />
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

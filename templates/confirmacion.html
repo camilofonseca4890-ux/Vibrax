@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block titulo %}Pedido recibido — Vibrax{% endblock %}
+
+{% block contenido %}
+
+<div class="confirmacion">
+  <div class="icono">&#10003;</div>
+  <h1>¡Recibimos tu pedido!</h1>
+  <p>
+    Gracias por confiar en Vibrax. Vamos a revisar los detalles de tu diseño
+    y te contactaremos pronto para confirmar el pedido y coordinar el pago y la entrega.
+  </p>
+  <a href="{{ url_for('index') }}" class="btn">Volver al inicio</a>
+</div>
+
+{% endblock %}

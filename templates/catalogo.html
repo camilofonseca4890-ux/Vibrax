@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block titulo %}Precios — Vibrax{% endblock %}
+{% block descripcion %}Conoce nuestros precios: camisetas, crop tops, hoodies y buzos estampados. Fichas técnicas con tela, colores y tallas de cada prenda.{% endblock %}
+
+{% block contenido %}
+
+<section class="seccion">
+  <div class="seccion-titulo">
+    <h2>Precios</h2>
+    <p>
+      Diseños 100% personalizados, sin límite de estampado y sin pagar más.
+      Elige tu prenda y cuéntanos tu diseño en el formulario de pedido.
+    </p>
+  </div>
+
+  <div class="tabla-precios">
+    {% set productos = [
+      ("La Master", "50.000"),
+      ("La Clásica", "40.000"),
+      ("Crop Dama", "35.000"),
+      ("Acid Wash", "55.000"),
+      ("Niños", "20.000"),
+      ("Buzo (sin cap)", "55.000"),
+      ("Hoodie (con cap)", "65.000"),
+    ] %}
+    {% for nombre, precio in productos %}
+    <div class="fila-precio">
+      <span class="nombre-producto">{{ nombre }}</span>
+      <span class="linea-punteada"></span>
+      <span class="precio">${{ precio }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="seccion-destacada patron-topografico">
+  <div class="icono-destacado">🔥</div>
+  <h2 style="color: var(--amarillo);">Estampados duraderos</h2>
+  <p>
+    Camisetas, crop tops, buzos y hoodies para niños y adultos.
+    Sin límite de estampado y sin pagar más por diseños más complejos.
+  </p>
+</section>
+
+<section class="seccion">
+  <div class="seccion-titulo">
+    <h2>Fichas técnicas</h2>
+    <p>Tela, colores disponibles y tabla de tallas de cada prenda.</p>
+  </div>
+
+  <div class="acordeon-fichas">
+    {% set fichas = [
+      {
+        "nombre": "Hoodie con Capota",
+        "tela": "100% algodón Mónaco nacional de 230 gramos. Puños y pretina en poli algodón, ojales en inoxidable y punteras en acetato.",
+        "colores": ["#f4a6c1", "#000000", "#ffffff", "#9a9a9a", "#d9c39a", "#0f3d2e"],
+        "columnas": ["Talla", "Largo (cm)", "Cont. pecho (cm)", "Manga (cm)", "Espalda (cm)"],
+        "filas": [["S","68","110","63","46"], ["M","69","112","65","47"], ["L","70","114","66","48"]]
+      },
+      {
+        "nombre": "Hoodie Cuello Redondo",
+        "tela": "100% algodón Mónaco nacional de 230 gramos. Cuello redondo, puños y pretina en poli algodón.",
+        "colores": ["#c81d11", "#000000", "#ffffff", "#9a9a9a"],
+        "columnas": ["Talla", "Largo (cm)", "Cont. pecho (cm)", "Manga (cm)", "Espalda (cm)"],
+        "filas": [["S","68","110","63","46"], ["M","69","112","65","47"], ["L","70","114","66","48"]]
+      },
+      {
+        "nombre": "Camiseta Tela Pesada",
+        "tela": "100% algodón peinado de 230 gramos. Cuello redondo en RIB y manga 3/4.",
+        "colores": ["#d9c39a", "#f2eec2", "#000000", "#ffffff"],
+        "columnas": ["Talla", "Largo (cm)", "Ancho (cm)", "Manga (cm)", "Hombro (cm)"],
+        "filas": [["S","71","49","25,5","46"], ["M","72","51,5","26","47"], ["L","74","55","27,5","50,5"]]
+      },
+      {
+        "nombre": "Camiseta Kids",
+        "tela": "100% algodón peinado de 150 gramos. Cuello redondo y manga corta.",
+        "colores": ["#2f6fd1", "#c81d11", "#2f9e44", "#f4a6c1"],
+        "columnas": ["Talla", "Largo (cm)", "Ancho (cm)", "Manga (cm)", "Hombro (cm)"],
+        "filas": [["2/4","42","28","13","26"], ["6/8","47","32","14","30"], ["10/12","52","36","16","32"], ["14/16","58","42","17","36"]]
+      },
+      {
+        "nombre": "Camiseta Clásica",
+        "tela": "100% algodón de 170 gramos. Cuello redondo y manga corta.",
+        "colores": ["#d9c39a", "#000000", "#9a9a9a", "#f4c2ce", "#a9d4f0"],
+        "columnas": ["Talla", "Largo (cm)", "Ancho (cm)", "Manga (cm)", "Hombro (cm)"],
+        "filas": [["S","68","46","19","42"], ["M","72","49","20","45"], ["L","73,5","50","21","46"], ["XL","76","52,5","22","50"]]
+      },
+      {
+        "nombre": "Camiseta Acid Wash",
+        "tela": "100% algodón peinado de 230 gramos. Cuello redondo en RIB y manga corta 3/4.",
+        "colores": ["#5b6f8f", "#000000"],
+        "columnas": ["Talla", "Largo (cm)", "Ancho (cm)", "Manga (cm)", "Hombro (cm)"],
+        "filas": [["M","72","51,5","26","47"], ["L","74","55","27,5","50,5"], ["XL","77","56","28","54"]]
+      },
+    ] %}
+
+    {% for ficha in fichas %}
+    <details class="ficha-producto">
+      <summary>
+        <span>{{ ficha.nombre }}</span>
+        <span class="ficha-flecha">▾</span>
+      </summary>
+      <div class="ficha-contenido">
+        <p class="ficha-tela">{{ ficha.tela }}</p>
+
+        <div class="ficha-colores">
+          {% for color in ficha.colores %}
+          <span class="muestra-color" style="background: {{ color }};"></span>
+          {% endfor %}
+        </div>
+
+        <table class="tabla-tallas">
+          <thead>
+            <tr>
+              {% for col in ficha.columnas %}
+              <th>{{ col }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for fila in ficha.filas %}
+            <tr>
+              {% for valor in fila %}
+              <td>{{ valor }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="seccion-destacada patron-topografico">
+  <div class="icono-destacado">🛒</div>
+  <h2>¿Ya sabes qué quieres?</h2>
+  <p style="margin-bottom: 24px;">Cuéntanos los detalles de tu diseño y te contactamos para confirmar.</p>
+  <a href="{{ url_for('pedido') }}" class="btn">Hacer mi pedido</a>
+</section>
+
+{% endblock %}

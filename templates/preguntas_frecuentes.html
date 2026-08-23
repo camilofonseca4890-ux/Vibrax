@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block titulo %}Preguntas frecuentes — Vibrax{% endblock %}
+{% block descripcion %}Cómo funciona el pago, tiempos de entrega y medios de pago de Vibrax.{% endblock %}
+
+{% block contenido %}
+
+<section class="seccion">
+  <div class="seccion-titulo">
+    <h2>Preguntas frecuentes</h2>
+    <p>Todo lo que necesitas saber antes de hacer tu pedido.</p>
+  </div>
+
+  <div class="acordeon-fichas">
+    {% set preguntas = [
+      ("¿Debo pagar todo por adelantado o solo un anticipo?", "Pagas el 50% para iniciar tu pedido y comenzar la producción. Cuando la prenda esté lista, te enviamos fotos para que confirmes que todo está correcto, y luego cancelas el 50% restante para realizar el envío."),
+      ("¿Puedo enviar mi propio diseño?", "Sí. Puedes enviarnos tu diseño listo para estampar, o la idea que tienes, y te ayudamos a adaptarlo para tu camiseta."),
+      ("¿Cuánto tarda en llegar mi pedido?", "Si estás en Tunja, tu pedido tarda aproximadamente entre 2 y 5 días. Para otros municipios o ciudades, el tiempo de entrega depende de la transportadora, una vez el pedido haya sido enviado."),
+      ("¿Puedo estampar adelante y atrás?", "Sí. Puedes elegir estampado al frente, en la espalda o en ambos lados, y esto no cambia el precio de la camiseta."),
+    ] %}
+
+    {% for pregunta, respuesta in preguntas %}
+    <details class="ficha-producto">
+      <summary>
+        <span>{{ pregunta }}</span>
+        <span class="ficha-flecha">▾</span>
+      </summary>
+      <div class="ficha-contenido">
+        <p class="ficha-tela" style="margin: 0;">{{ respuesta }}</p>
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="seccion" style="background: var(--gris-claro);">
+  <div class="seccion-titulo">
+    <h2>Medios de pago</h2>
+    <p>Elige la opción que más te convenga.</p>
+  </div>
+
+  <div class="medios-pago">
+    <div class="tarjeta-pago">
+      <h3>Transferencia bancaria</h3>
+      <p class="metodo-nombre">Nequi</p>
+      <p class="metodo-detalle">Número de cuenta: 3223478069</p>
+    </div>
+    <div class="tarjeta-pago">
+      <h3>Transferencia bancaria</h3>
+      <p class="metodo-nombre">Bre-B</p>
+      <p class="metodo-detalle">Número de cuenta: 3223478069</p>
+    </div>
+    <div class="tarjeta-pago">
+      <h3>Efectivo</h3>
+      <p class="metodo-nombre">Pago contraentrega</p>
+      <p class="metodo-detalle">Únicamente en Tunja</p>
+    </div>
+  </div>
+</section>
+
+<section class="seccion-destacada patron-topografico">
+  <div class="icono-destacado">💬</div>
+  <h2>¿Tienes otra duda?</h2>
+  <p style="margin-bottom: 24px;">Escríbenos directo por WhatsApp y te respondemos rápido.</p>
+  <a href="https://wa.me/573005159665" target="_blank" rel="noopener" class="btn">Escribir por WhatsApp</a>
+</section>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block titulo %}Hacer pedido — Vibrax{% endblock %}
+{% block descripcion %}Cuéntanos tu diseño y hacemos tu camiseta, buzo o hoodie a tu gusto.{% endblock %}
+
+{% block contenido %}
+
+<div class="form-container">
+  <h1>Cuéntanos tu diseño</h1>
+  <p>Llena los datos y nos pondremos en contacto contigo para confirmar el pedido.</p>
+
+  {% with mensajes = get_flashed_messages(with_categories=true) %}
+    {% if mensajes %}
+    <div class="mensajes">
+      {% for categoria, mensaje in mensajes %}
+        <div class="mensaje-error">{{ mensaje }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" enctype="multipart/form-data" novalidate>
+    <div class="form-grid">
+
+      <div class="campo">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" name="nombre" value="{{ form.get('nombre', '') }}" required />
+      </div>
+
+      <div class="campo">
+        <label for="telefono">Teléfono / WhatsApp</label>
+        <input type="tel" id="telefono" name="telefono" value="{{ form.get('telefono', '') }}" required />
+      </div>
+
+      <div class="campo full">
+        <label for="email">Correo electrónico <span class="opcional">(opcional)</span></label>
+        <input type="email" id="email" name="email" value="{{ form.get('email', '') }}" />
+      </div>
+
+      <div class="campo full">
+        <label for="descripcion_diseno">Describe el diseño que quieres</label>
+        <textarea id="descripcion_diseno" name="descripcion_diseno" placeholder="Ej: logo de mi negocio en el pecho, letras blancas sobre fondo negro..." required>{{ form.get('descripcion_diseno', '') }}</textarea>
+      </div>
+
+      <div class="campo full">
+        <label for="imagen_referencia">Imagen de referencia <span class="opcional">(opcional)</span></label>
+        <input type="file" id="imagen_referencia" name="imagen_referencia" accept="image/png, image/jpeg, image/webp, image/gif" />
+        <span class="ayuda">Formatos: PNG, JPG, WEBP o GIF — máx. 8 MB.</span>
+      </div>
+
+      <div class="campo">
+        <label for="talla">Talla</label>
+        <select id="talla" name="talla" required>
+          <option value="" disabled {{ 'selected' if not form.get('talla') else '' }}>Selecciona una talla</option>
+          {% for t in ["XS", "S", "M", "L", "XL", "XXL"] %}
+          <option value="{{ t }}" {{ 'selected' if form.get('talla') == t else '' }}>{{ t }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="cantidad">Cantidad</label>
+        <input type="number" id="cantidad" name="cantidad" min="1" value="{{ form.get('cantidad', '1') }}" required />
+      </div>
+
+      <div class="campo">
+        <label for="color_tela">Color de tela</label>
+        <input type="text" id="color_tela" name="color_tela" placeholder="Ej: blanco, negro, gris jaspe..." value="{{ form.get('color_tela', '') }}" required />
+      </div>
+
+      <div class="campo">
+        <label for="tipo_estampado">Tipo de estampado</label>
+        <select id="tipo_estampado" name="tipo_estampado" required>
+          <option value="" disabled {{ 'selected' if not form.get('tipo_estampado') else '' }}>Selecciona un tipo</option>
+          {% for tipo in ["Estampado clásico", "Full color", "Vinilo textil", "Sublimación", "Bordado", "Otro"] %}
+          <option value="{{ tipo }}" {{ 'selected' if form.get('tipo_estampado') == tipo else '' }}>{{ tipo }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="fecha_entrega">Fecha de entrega deseada</label>
+        <input type="date" id="fecha_entrega" name="fecha_entrega" value="{{ form.get('fecha_entrega', '') }}" required />
+      </div>
+
+      <div class="campo full">
+        <label for="comentarios">Comentarios adicionales <span class="opcional">(opcional)</span></label>
+        <textarea id="comentarios" name="comentarios" placeholder="Cualquier detalle extra que debamos saber...">{{ form.get('comentarios', '') }}</textarea>
+      </div>
+
+    </div>
+
+    <div class="form-acciones">
+      <button type="submit" class="btn">Enviar pedido</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

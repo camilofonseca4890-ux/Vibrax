@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block titulo %}Panel de pedidos — Vibrax{% endblock %}
+
+{% block contenido %}
+
+<div class="panel">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <h1>Pedidos recibidos</h1>
+      <p>Uso interno — aquí se listan todos los pedidos guardados en la base de datos.</p>
+    </div>
+    <a href="{{ url_for('logout') }}" class="btn btn-secundario">Cerrar sesión</a>
+  </div>
+
+  {% if pedidos %}
+  <table class="tabla-pedidos">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Contacto</th>
+        <th>Diseño</th>
+        <th>Ref.</th>
+        <th>Talla</th>
+        <th>Cant.</th>
+        <th>Tela</th>
+        <th>Estampado</th>
+        <th>Entrega</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in pedidos %}
+      <tr>
+        <td>{{ p['id'] }}</td>
+        <td>{{ p['fecha_creacion'] }}</td>
+        <td>{{ p['nombre'] }}</td>
+        <td>{{ p['telefono'] }}{% if p['email'] %}<br>{{ p['email'] }}{% endif %}</td>
+        <td>{{ p['descripcion_diseno'] }}{% if p['comentarios'] %}<br><em>{{ p['comentarios'] }}</em>{% endif %}</td>
+        <td>
+          {% if p['imagen_referencia'] %}
+          <a href="{{ url_for('static', filename='uploads/' ~ p['imagen_referencia']) }}" target="_blank">
+            <img class="miniatura" src="{{ url_for('static', filename='uploads/' ~ p['imagen_referencia']) }}" alt="Referencia" />
+          </a>
+          {% else %}
+          <div class="sin-imagen">Sin imagen</div>
+          {% endif %}
+        </td>
+        <td>{{ p['talla'] }}</td>
+        <td>{{ p['cantidad'] }}</td>
+        <td>{{ p['color_tela'] }}</td>
+        <td>{{ p['tipo_estampado'] }}</td>
+        <td>{{ p['fecha_entrega'] }}</td>
+        <td>
+          <form method="POST" action="{{ url_for('actualizar_estado', pedido_id=p['id']) }}">
+            <select name="estado" class="estado-select" onchange="this.form.submit()">
+              {% for estado in ["Nuevo", "Confirmado", "En producción", "Entregado", "Cancelado"] %}
+              <option value="{{ estado }}" {{ 'selected' if p['estado'] == estado else '' }}>{{ estado }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="badge-vacio">Todavía no hay pedidos registrados.</div>
+  {% endif %}
+</div>
+
+{% endblock %}

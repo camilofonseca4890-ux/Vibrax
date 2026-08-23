@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block titulo %}Vibrax — Diseña tu prenda a tu estilo{% endblock %}</title>
+  <meta name="description" content="{% block descripcion %}Camisetas, buzos y hoodies estampados a tu gusto. Diseños 100% personalizados, sin límite de estampado y sin pagar más.{% endblock %}" />
+
+  <!-- Open Graph: vista previa al compartir en WhatsApp, Facebook, Instagram -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Vibrax" />
+  <meta property="og:title" content="{{ self.titulo() }}" />
+  <meta property="og:description" content="{{ self.descripcion() }}" />
+  <meta property="og:image" content="{{ url_for('static', filename='img/logo.png', _external=True) }}" />
+  <meta property="og:url" content="{{ request.url }}" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ self.titulo() }}" />
+  <meta name="twitter:description" content="{{ self.descripcion() }}" />
+  <meta name="twitter:image" content="{{ url_for('static', filename='img/logo.png', _external=True) }}" />
+
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <header class="header">
+    <a href="{{ url_for('index') }}" class="logo">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Vibrax" class="logo-img" />
+    </a>
+    <nav class="nav">
+      <a href="{{ url_for('index') }}" class="{{ 'activo' if request.endpoint == 'index' else '' }}">Inicio</a>
+      <a href="{{ url_for('catalogo') }}" class="{{ 'activo' if request.endpoint == 'catalogo' else '' }}">Precios</a>
+      <a href="{{ url_for('inspiraciones') }}" class="{{ 'activo' if request.endpoint == 'inspiraciones' else '' }}">Inspiraciones</a>
+      <a href="{{ url_for('preguntas_frecuentes') }}" class="{{ 'activo' if request.endpoint == 'preguntas_frecuentes' else '' }}">Preguntas frecuentes</a>
+      <a href="{{ url_for('pedido') }}" class="{{ 'activo' if request.endpoint == 'pedido' else '' }}">Pedir estampado</a>
+    </nav>
+    <a href="{{ url_for('pedido') }}" class="btn">Hacer pedido</a>
+  </header>
+
+  <main>
+    {% block contenido %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="footer-contacto">
+      <a href="https://wa.me/573005159665" target="_blank" rel="noopener">📱 3005159665</a>
+      <a href="https://instagram.com/vibrax_23" target="_blank" rel="noopener">📷 @vibrax_23</a>
+      <a href="https://www.tiktok.com/@vibrax67" target="_blank" rel="noopener">🎵 @vibrax67</a>
+      <a href="https://facebook.com/Vibrax" target="_blank" rel="noopener">👍 Vibrax</a>
+    </div>
+    <p>&copy; {{ 2026 }} Vibrax — Diseña tu prenda a tu estilo.</p>
+  </footer>
+  <a
+    href="https://wa.me/573005159665?text=Hola%20Vibrax%2C%20quiero%20hacer%20un%20pedido"
+    target="_blank"
+    rel="noopener"
+    class="whatsapp-flotante"
+    aria-label="Escríbenos por WhatsApp"
+  >
+    <svg viewBox="0 0 32 32" width="30" height="30" fill="currentColor" aria-hidden="true">
+      <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.7 4.607 1.907 6.475L4 29l7.72-1.858A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.75a9.7 9.7 0 0 1-4.95-1.357l-.355-.21-4.583 1.103 1.127-4.47-.232-.366A9.71 9.71 0 0 1 6.25 15c0-5.376 4.378-9.75 9.754-9.75 5.375 0 9.746 4.374 9.746 9.75 0 5.377-4.371 9.75-9.746 9.75zm5.34-7.297c-.293-.147-1.734-.857-2.003-.954-.269-.098-.464-.147-.66.147-.196.293-.757.954-.928 1.15-.171.196-.342.22-.635.073-.293-.147-1.235-.455-2.352-1.45-.87-.775-1.457-1.733-1.628-2.026-.171-.293-.018-.452.129-.598.132-.132.293-.342.44-.513.147-.171.196-.293.293-.489.098-.196.049-.367-.024-.514-.073-.147-.66-1.59-.904-2.177-.238-.572-.48-.494-.66-.503l-.562-.01c-.196 0-.514.073-.783.367-.269.293-1.026 1.003-1.026 2.446 0 1.443 1.05 2.837 1.196 3.033.147.196 2.066 3.155 5.007 4.424.7.302 1.246.483 1.672.618.702.223 1.342.192 1.848.117.564-.084 1.734-.709 1.979-1.393.245-.685.245-1.271.171-1.393-.073-.123-.269-.196-.562-.343z"/>
+    </svg>
+  </a>
+
+</body>
+</html>
