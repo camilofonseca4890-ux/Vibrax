@@ -20,7 +20,7 @@ PANEL_PASSWORD_HASH = generate_password_hash(os.environ.get("PANEL_PASSWORD", "2
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "cambia-esta-clave-en-produccion")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-app.config["MAX_CONTENT_LENGTH"] = 8 * 1024 * 1024  # 8 MB por archivo
+app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024  # 20 MB por archivo (fotos de celular)
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -195,6 +195,12 @@ def confirmacion():
 @app.errorhandler(404)
 def pagina_no_encontrada(error):
     return render_template("404.html"), 404
+
+
+@app.errorhandler(413)
+def archivo_muy_pesado(error):
+    flash("La imagen que intentaste subir pesa demasiado. Usa una foto de menos de 20 MB.", "error")
+    return redirect(url_for("pedido"))
 
 
 # ---------- Panel de pedidos (uso interno) ----------

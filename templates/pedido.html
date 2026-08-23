@@ -45,7 +45,7 @@
       <div class="campo full">
         <label for="imagen_referencia">Imagen de referencia <span class="opcional">(opcional)</span></label>
         <input type="file" id="imagen_referencia" name="imagen_referencia" accept="image/png, image/jpeg, image/webp, image/gif" />
-        <span class="ayuda">Formatos: PNG, JPG, WEBP o GIF — máx. 8 MB.</span>
+        <span class="ayuda">Formatos: PNG, JPG, WEBP o GIF — máx. 20 MB.</span>
       </div>
 
       <div class="campo">
@@ -71,9 +71,8 @@
       <div class="campo">
         <label for="tipo_estampado">Tipo de estampado</label>
         <select id="tipo_estampado" name="tipo_estampado" required>
-          <option value="" disabled {{ 'selected' if not form.get('tipo_estampado') else '' }}>Selecciona un tipo</option>
-          {% for tipo in ["Estampado clásico", "Full color", "Vinilo textil", "Sublimación", "Bordado", "Otro"] %}
-          <option value="{{ tipo }}" {{ 'selected' if form.get('tipo_estampado') == tipo else '' }}>{{ tipo }}</option>
+          {% for tipo in ["DTF"] %}
+          <option value="{{ tipo }}" selected>{{ tipo }}</option>
           {% endfor %}
         </select>
       </div>
