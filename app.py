@@ -114,7 +114,8 @@ def preguntas_frecuentes():
 @app.route('/google24cd526c7de90067.html')
 def google_verification():
     return 'google-site-verification: google24cd526c7de90067.html'
-    @app.route('/sitemap.xml')
+    
+@app.route('/sitemap.xml')
 def sitemap():
     xml = '''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
