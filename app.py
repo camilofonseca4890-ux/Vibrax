@@ -111,7 +111,10 @@ def inspiraciones():
 def preguntas_frecuentes():
     return render_template("preguntas_frecuentes.html")
 
-
+@app.route('/google24cd526c7de90067.html')
+def google_verification():
+    return 'google-site-verification: google24cd526c7de90067.html'
+    
 @app.route("/pedido", methods=["GET", "POST"])
 def pedido():
     if request.method == "POST":
