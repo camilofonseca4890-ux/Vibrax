@@ -125,6 +125,7 @@ def sitemap():
   <url><loc>https://vibrax.onrender.com/pedido</loc></url>
   <url><loc>https://vibrax.onrender.com/preguntas-frecuentes</loc></url>
   <url><loc>https://vibrax.onrender.com/catalogo</loc></url>
+  <url><loc>https://vibrax.onrender.com/inspiraciones</loc></url>
 </urlset>'''
     return app.response_class(xml, mimetype='application/xml')
     
