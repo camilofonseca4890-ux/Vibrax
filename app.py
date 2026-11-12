@@ -18,6 +18,8 @@ PANEL_USUARIO = os.environ.get("PANEL_USUARIO", "Vibrax_23")
 PANEL_PASSWORD_HASH = generate_password_hash(os.environ.get("PANEL_PASSWORD", "230623"))
 
 app = Flask(__name__)
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "cambia-esta-clave-en-produccion")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024  # 20 MB por archivo (fotos de celular)
