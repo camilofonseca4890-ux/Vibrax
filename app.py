@@ -128,7 +128,10 @@ def sitemap():
   <url><loc>https://vibrax.onrender.com/inspiraciones</loc></url>
 </urlset>'''
     return app.response_class(xml, mimetype='application/xml')
-    
+@app.route('/robots.txt')
+def robots():
+    texto = "User-agent: *\nAllow: /\n\nSitemap: https://vibrax.onrender.com/sitemap.xml\n"
+    return app.response_class(texto, mimetype='text/plain')
 @app.route("/pedido", methods=["GET", "POST"])
 def pedido():
     if request.method == "POST":
